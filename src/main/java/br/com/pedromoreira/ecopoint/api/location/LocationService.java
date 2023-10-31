@@ -67,4 +67,14 @@ public class LocationService {
             return null;
         }
     }
+
+    public boolean delete(Long id){
+        Optional<Location> optional = rep.findById(id);
+        if(optional.isPresent()){
+            rep.deleteById(id);
+            return true;
+        }else {
+            return false;
+        }
+    }
 }
