@@ -50,4 +50,14 @@ public class ItemService {
             return null;
         }
     }
+
+    public boolean delete(Long id){
+        Optional<Item> optional = rep.findById(id);
+        if(optional.isPresent()){
+            rep.deleteById(id);
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
