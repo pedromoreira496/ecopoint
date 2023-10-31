@@ -27,4 +27,27 @@ public class ItemService {
         Assert.isNull(item.getId(), "Não foi possível inserir o registro.");
         return ItemDTO.create(rep.save(item));
     }
+
+    public ItemDTO update(Item i, Long id){
+        Assert.notNull(id, "Não foi possível atualizar o registro");
+
+        Optional<Item> optional = rep.findById(id);
+
+        if(optional.isPresent()){
+            Item db = optional.get();
+
+            if(i.getTitulo() != null){
+                db.setTitulo(i.getTitulo());
+            }
+            if(i.getImagem() != null){
+                db.setImagem(i.getImagem());
+            }
+
+            rep.save(db);
+
+            return ItemDTO.create(db);
+        }else{
+            return null;
+        }
+    }
 }
