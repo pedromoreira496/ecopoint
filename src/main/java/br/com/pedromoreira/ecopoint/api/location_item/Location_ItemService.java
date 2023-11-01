@@ -27,4 +27,26 @@ public class Location_ItemService {
         Assert.isNull(locationItem.getId(), "Não foi possível inserir o registro!");
         return Location_ItemDTO.create(rep.save(locationItem));
     }
+
+    public Location_ItemDTO update(Location_Item li, Long id){
+        Assert.notNull(id, "Não foi possível atualizar o registro!");
+
+        Optional<Location_Item> optional = rep.findById(id);
+
+        if(optional.isPresent()){
+            Location_Item db = optional.get();
+            if(li.getDescricao() != null){
+                db.setDescricao(li.getDescricao());
+            }
+            if(li.getAssociacao() != null){
+                db.setAssociacao(li.getAssociacao());
+            }
+
+            rep.save(db);
+
+            return Location_ItemDTO.create(db);
+        } else {
+            return null;
+        }
+    }
 }
