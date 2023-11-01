@@ -22,4 +22,9 @@ public class UserService {
         Optional<User> user = rep.findById(id);
         return user.map(UserDTO::create).orElse(null);
     }
+
+    public UserDTO insert(User user){
+        Assert.isNull(user.getId(), "Não foi possível inserir o registro!");
+        return UserDTO.create(rep.save(user));
+    }
 }
