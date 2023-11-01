@@ -53,4 +53,14 @@ public class UserService {
             return null;
         }
     }
+
+    public boolean delete(Long id){
+        Optional<User> optional = rep.findById(id);
+        if(optional.isPresent()){
+            rep.deleteById(id);
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
