@@ -27,4 +27,30 @@ public class UserService {
         Assert.isNull(user.getId(), "Não foi possível inserir o registro!");
         return UserDTO.create(rep.save(user));
     }
+
+    public UserDTO update(User u, Long id){
+        Assert.notNull(id, "Não foi possível atualizar o registro!");
+
+        Optional<User> optional = rep.findById(id);
+
+        if(optional.isPresent()){
+            User db = optional.get();
+
+            if(u.getNome() != null){
+                db.setNome(u.getNome());
+            }
+            if(u.getEmail() != null){
+                db.setEmail(u.getEmail());
+            }
+            if(u.getPassword() != null){
+                db.setPassword(u.getPassword());
+            }
+
+            rep.save(db);
+
+            return UserDTO.create(db);
+        } else {
+            return null;
+        }
+    }
 }
