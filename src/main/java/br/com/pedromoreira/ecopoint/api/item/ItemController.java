@@ -34,6 +34,6 @@ public class ItemController {
     }
 
     private URI getUri(Long id){
-        return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand().toUri();
+        return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
     }
 }
