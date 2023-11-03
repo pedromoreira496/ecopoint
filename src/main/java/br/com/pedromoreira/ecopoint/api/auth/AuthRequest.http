@@ -1,0 +1,32 @@
+### REGISTER
+POST http://localhost:8080/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "nome": "user dev",
+  "email": "user@dev.com",
+  "password": "ImDev",
+  "role": "USER"
+}
+
+### LOGIN AS ADMIN
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "pedro@moreira.com",
+  "password": "admin"
+}
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+### LOGIN AS USER
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@dev.com",
+  "password": "ImDev"
+}
+
+> {% client.global.set("auth_token", response.body.token); %}
