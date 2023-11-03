@@ -34,6 +34,13 @@ public class LocationController {
         return ResponseEntity.created(loc).build();
     }
 
+    @PatchMapping("{id}")
+    public ResponseEntity<LocationDTO> update(@PathVariable("id") Long id, @RequestBody Location location){
+        location.setId(id);
+        LocationDTO l = service.update(location, id);
+        return l != null ? ResponseEntity.ok(l) : ResponseEntity.notFound().build();
+    }
+
 
     private URI getUri(Long id){
         return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
