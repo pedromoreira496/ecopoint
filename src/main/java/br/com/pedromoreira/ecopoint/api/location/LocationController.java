@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 
@@ -26,6 +28,11 @@ public class LocationController {
     public ResponseEntity<LocationDTO> selectById(@PathVariable("id") Long id){
         LocationDTO location = service.getLocationById(id);
         return location != null ? ResponseEntity.ok(location) : ResponseEntity.notFound().build();
+    }
+
+
+    private URI getUri(Long id){
+        return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
     }
 
 }
