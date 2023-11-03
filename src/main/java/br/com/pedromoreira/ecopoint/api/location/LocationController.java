@@ -2,10 +2,7 @@ package br.com.pedromoreira.ecopoint.api.location;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -28,6 +25,13 @@ public class LocationController {
     public ResponseEntity<LocationDTO> selectById(@PathVariable("id") Long id){
         LocationDTO location = service.getLocationById(id);
         return location != null ? ResponseEntity.ok(location) : ResponseEntity.notFound().build();
+    }
+
+    @PostMapping
+    public ResponseEntity<LocationDTO> insert(@RequestBody Location location){
+        LocationDTO l = service.insert(location);
+        URI loc = getUri(l.getId());
+        return ResponseEntity.created(loc).build();
     }
 
 
