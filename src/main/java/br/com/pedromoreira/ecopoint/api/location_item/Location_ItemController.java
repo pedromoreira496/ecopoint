@@ -26,6 +26,13 @@ public class Location_ItemController {
         return locationItem != null ? ResponseEntity.ok(locationItem) : ResponseEntity.notFound().build();
     }
 
+    @PostMapping
+    public ResponseEntity<Location_ItemDTO> insert(@RequestBody Location_Item locationItem){
+        Location_ItemDTO li = service.insert(locationItem);
+        URI locItem = getUri(li.getId());
+        return ResponseEntity.created(locItem).build();
+    }
+
     private URI getUri(Long id){
         return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
     }
