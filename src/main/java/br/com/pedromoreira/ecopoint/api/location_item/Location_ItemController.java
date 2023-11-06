@@ -40,6 +40,11 @@ public class Location_ItemController {
         return li != null ? ResponseEntity.ok(li) : ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id){
+        return service.delete(id) ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
+
     private URI getUri(Long id){
         return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
     }
