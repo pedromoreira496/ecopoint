@@ -33,6 +33,13 @@ public class Location_ItemController {
         return ResponseEntity.created(locItem).build();
     }
 
+    @PatchMapping("{id}")
+    public ResponseEntity<Location_ItemDTO> update(@PathVariable("id") Long id, @RequestBody Location_Item locationItem){
+        locationItem.setId(id);
+        Location_ItemDTO li = service.update(locationItem, id);
+        return li != null ? ResponseEntity.ok(li) : ResponseEntity.notFound().build();
+    }
+
     private URI getUri(Long id){
         return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
     }
