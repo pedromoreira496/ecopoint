@@ -1,0 +1,36 @@
+### GET ALL LOCATION_ITEMS
+GET http://localhost:8080/api/v1/locationitems
+Authorization: Bearer {{auth_token}}
+
+### GET LOCATION_ITEM BY ID
+GET http://localhost:8080/api/v1/locationitems/1
+Authorization: Bearer {{auth_token}}
+
+### POST LOCATION_ITEM
+POST http://localhost:8080/api/v1/locationitems
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "descricao": "Lugar daorinha",
+  "associacao": 1699247143,
+  "location": {
+    "id": 2
+  },
+  "item": {
+    "id": 4
+  }
+}
+
+### PATCH LOCATION_ITEM
+PATCH http://localhost:8080/api/v1/locationitems/1
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "descricao": "Este lugar possui reciclagem de pilhas."
+}
+
+### DELETE LOCATION_ITEM
+DELETE http://localhost:8080/api/v1/locationitems/1
+Authorization: Bearer {{auth_token}}
