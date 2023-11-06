@@ -2,11 +2,10 @@ package br.com.pedromoreira.ecopoint.api.location_item;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -25,5 +24,9 @@ public class Location_ItemController {
     public ResponseEntity<Location_ItemDTO> selectById(@PathVariable("id") Long id){
         Location_ItemDTO locationItem = service.getLocation_ItemById(id);
         return locationItem != null ? ResponseEntity.ok(locationItem) : ResponseEntity.notFound().build();
+    }
+
+    private URI getUri(Long id){
+        return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
     }
 }
