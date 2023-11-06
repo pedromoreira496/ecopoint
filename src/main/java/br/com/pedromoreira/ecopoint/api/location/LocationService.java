@@ -2,6 +2,7 @@ package br.com.pedromoreira.ecopoint.api.location;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.List;
@@ -13,10 +14,11 @@ public class LocationService {
     @Autowired
     private LocationRepository rep;
 
+    @Transactional
     public List<LocationDTO> getLocations(){
         return rep.findAll().stream().map(LocationDTO::create).collect(Collectors.toList());
     }
-
+    @Transactional
     public LocationDTO getLocationById(Long id){
         Optional<Location> location = rep.findById(id);
         return location.map(LocationDTO::create).orElse(null);
