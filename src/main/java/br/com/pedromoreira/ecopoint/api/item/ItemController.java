@@ -33,7 +33,7 @@ public class ItemController {
         return ResponseEntity.created(location).build();
     }
 
-    @PatchMapping("{id}")
+    @PutMapping("{id}")
     public ResponseEntity<ItemDTO> update(@PathVariable("id") Long id, @RequestBody Item item){
         item.setId(id);
         ItemDTO i = service.update(item, id);
