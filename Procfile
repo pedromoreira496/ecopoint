@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT $JAVA_OPTS -Dspring.profiles.active=prod -jar target/ecopoint-1.1.0.jar
+web: java -Dserver.port=$PORT $JAVA_OPTS -Dspring.profiles.active=prod -jar target/ecopoint-0.0.1-SNAPSHOT.jar
