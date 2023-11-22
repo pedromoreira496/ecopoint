@@ -32,7 +32,10 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .antMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
+                        .antMatchers(HttpMethod.GET, "/swagger*/**").permitAll()
+                        .antMatchers(HttpMethod.GET, "/v2/api-docs").permitAll()
+                        .antMatchers(HttpMethod.GET, "/configuration/**").permitAll()
+                        .antMatchers(HttpMethod.GET, "/webjars/**").permitAll()
                         .antMatchers(HttpMethod.POST, "/api/v1/auth/login").permitAll()
                         .antMatchers(HttpMethod.POST, "/api/v1/auth/register").permitAll()
                         .antMatchers(HttpMethod.POST, "/api/v1/items").hasRole("ADMIN")
